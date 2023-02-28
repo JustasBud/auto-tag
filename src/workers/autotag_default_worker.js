@@ -166,7 +166,7 @@ class AutotagDefaultWorker {
       const tagValueVariables = tagValue.match(/\$[A-Za-z0-9.]+/g) || [];
 
       tagValueVariables.forEach(tagValueVariable => {
-        const tagValueVariableReplacement = get(this.event, tagValueVariable.replace(keyword, ''), undefined);
+        const tagValueVariableReplacement = get(this.event, tagValueVariable.replace(keyword, '').replaceAll(',',' ').replaceAll('[',' ').replaceAll(']',' '), undefined);
 
         if (tagValueVariableReplacement === undefined) {
           console.log(`WARN: Failed to perform the variable substitution for ${tagValueVariable}`);
